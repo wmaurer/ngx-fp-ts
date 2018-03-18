@@ -1,0 +1,52 @@
+{
+    "author": "Wayne Maurer <wayne-npm@waynemaurer.net>",
+    "bugs": {
+        "url": "https://github.com/wmaurer/ngx-fp-ts/issues"
+    },
+    "dependencies": {},
+    "description": "Angular structural directives for fp-ts types (Option, Either)",
+    "devDependencies": {
+        "@angular/compiler": "^5.2.9",
+        "@angular/compiler-cli": "^5.2.9",
+        "@angular/core": "^5.2.0",
+        "@types/node": "^9.4.7",
+        "fp-ts": "^1.0.0",
+        "ng-packagr": "^2.2.0",
+        "prettier": "^1.11.1",
+        "rxjs": "^5.5.6",
+        "shx": "^0.2.2",
+        "ts-node": "^5.0.1",
+        "tslint": "~5.9.1",
+        "typescript": "~2.5.3"
+    },
+    "homepage": "https://github.com/wmaurer/ngx-fp-ts#readme",
+    "keywords": [
+        "angular",
+        "fp-ts"
+    ],
+    "license": "MIT",
+    "name": "ngx-fp-ts",
+    "ngPackage": {
+        "$schema": "./node_modules/ngx-packagr/package.schema.json",
+        "lib": {
+            "entryFile": "./src/public_api.ts"
+        }
+    },
+    "peerDependencies": {
+        "@angular/core": "^5.2.0",
+        "fp-ts": "^1.0.0",
+        "rxjs": "^5.5.6"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wmaurer/ngx-fp-ts.git"
+    },
+    "scripts": {
+        "compile-lib": "./node_modules/.bin/ng-packagr -p ./package.json",
+        "mocha": "mocha ./test/index.ts --require ts-node/register",
+        "precompile-lib": "shx rm -rf ./dist",
+        "prepublish": "npm run compile-lib",
+        "test": "npm run mocha"
+    },
+    "version": "0.0.1"
+}
