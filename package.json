@@ -20,10 +20,7 @@
         "typescript": "~2.5.3"
     },
     "homepage": "https://github.com/wmaurer/ngx-fp-ts#readme",
-    "keywords": [
-        "angular",
-        "fp-ts"
-    ],
+    "keywords": ["angular", "fp-ts"],
     "license": "MIT",
     "name": "ngx-fp-ts",
     "ngPackage": {
@@ -45,7 +42,6 @@
         "compile-lib": "./node_modules/.bin/ng-packagr -p ./package.json",
         "mocha": "mocha ./test/index.ts --require ts-node/register",
         "precompile-lib": "shx rm -rf ./dist",
-        "prepublish": "npm run compile-lib",
         "test": "npm run mocha"
     },
     "version": "0.0.1"
