@@ -1,5 +1,5 @@
 import { Directive, Input, ViewContainerRef, TemplateRef } from '@angular/core';
-import { Either } from 'fp-ts/lib/Either';
+import { Either, isRight, isLeft } from 'fp-ts/lib/Either';
 
 import { initialIfContext, initialRefs, IfContext, assertTemplate, updateView } from './common';
 
@@ -17,8 +17,13 @@ export class IfRight {
     @Input()
     set ifRight(either: Either<any, any>) {
         testIsAnEither(either, 'ifRight');
-        this.context.ifTrue = either.isRight();
-        this.context.$implicit = either.value;
+        if (isRight(either)) {
+            this.context.ifTrue = true;
+            this.context.$implicit = either.right;
+        } else {
+            this.context.ifTrue = false;
+            this.context.$implicit = either.left;
+        }
         updateView(this.context, this.refs);
     }
 
@@ -53,8 +58,13 @@ export class IfLeft {
     @Input()
     set ifLeft(either: Either<any, any>) {
         testIsAnEither(either, 'ifLeft');
-        this.context.ifTrue = either.isLeft();
-        this.context.$implicit = either.value;
+        if (isLeft(either)) {
+            this.context.ifTrue = true;
+            this.context.$implicit = either.left;
+        } else {
+            this.context.ifTrue = false;
+            this.context.$implicit = either.right;
+        }
         updateView(this.context, this.refs);
     }
 
@@ -76,11 +86,7 @@ export class IfLeft {
 }
 
 function testIsAnEither(either: any, directiveName: string) {
-    const isAnEither =
-        !!either &&
-        typeof either === 'object' &&
-        typeof either.isLeft === 'function' &&
-        typeof either.isRight === 'function';
+    const isAnEither = !!either && typeof either === 'object' && (isRight(either) || isLeft(either));
     if (!isAnEither) {
         throw new Error(`Error in ${directiveName} directive. ${either} is not an fp-ts Either!`);
     }

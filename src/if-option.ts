@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Option } from 'fp-ts/lib/Option';
+import { Option, isNone, isSome } from 'fp-ts/lib/Option';
 
 import { initialIfContext, initialRefs, IfContext, assertTemplate, updateView } from './common';
 
@@ -17,8 +17,13 @@ export class IfSome {
     @Input()
     set ifSome(option: Option<any>) {
         testIsAnOption(option, 'ifSome');
-        this.context.ifTrue = option.isSome();
-        this.context.$implicit = option.getOrElse(null);
+        if (isSome(option)) {
+            this.context.ifTrue = true;
+            this.context.$implicit = option.value;
+        } else {
+            this.context.ifTrue = false;
+            this.context.$implicit = undefined;
+        }
         updateView(this.context, this.refs);
     }
 
@@ -53,8 +58,12 @@ export class IfNone {
     @Input()
     set ifNone(option: Option<any>) {
         testIsAnOption(option, 'ifNone');
-        this.context.ifTrue = option.isNone();
-        this.context.$implicit = option.getOrElse(null);
+        this.context.$implicit = undefined;
+        if (isNone(option)) {
+            this.context.ifTrue = true;
+        } else {
+            this.context.ifTrue = false;
+        }
         updateView(this.context, this.refs);
     }
 
@@ -76,11 +85,7 @@ export class IfNone {
 }
 
 function testIsAnOption(option: any, directiveName: string) {
-    const isAnOption =
-        !!option &&
-        typeof option === 'object' &&
-        typeof option.isSome === 'function' &&
-        typeof option.isNone === 'function';
+    const isAnOption = !!option && typeof option === 'object' && (isSome(option) || isNone(option));
     if (!isAnOption) {
         throw new Error(`Error in ${directiveName} directive. ${option} is not an fp-ts Option!`);
     }

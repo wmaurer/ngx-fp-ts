@@ -6,21 +6,25 @@
     "dependencies": {},
     "description": "Angular structural directives for fp-ts types (Option, Either)",
     "devDependencies": {
-        "@angular/compiler": "^5.2.9",
-        "@angular/compiler-cli": "^5.2.9",
-        "@angular/core": "^5.2.0",
-        "@types/node": "^9.4.7",
-        "fp-ts": "^1.0.0",
-        "ng-packagr": "^2.2.0",
-        "prettier": "^1.11.1",
-        "rxjs": "^5.5.6",
-        "shx": "^0.2.2",
-        "ts-node": "^5.0.1",
-        "tslint": "~5.9.1",
-        "typescript": "~2.5.3"
+        "@angular/cli": "^8",
+        "@angular/compiler": "^8",
+        "@angular/compiler-cli": "^8",
+        "@angular/core": "^8",
+        "@types/node": "^12.12.6",
+        "fp-ts": "^2",
+        "ng-packagr": "^5.7.1",
+        "prettier": "^1.18.2",
+        "rxjs": "^6",
+        "shx": "^0.3.2",
+        "ts-node": "^8.4.1",
+        "tslint": "^5.20.1",
+        "typescript": "3.5.3"
     },
     "homepage": "https://github.com/wmaurer/ngx-fp-ts#readme",
-    "keywords": ["angular", "fp-ts"],
+    "keywords": [
+        "angular",
+        "fp-ts"
+    ],
     "license": "MIT",
     "name": "ngx-fp-ts",
     "ngPackage": {
@@ -30,9 +34,9 @@
         }
     },
     "peerDependencies": {
-        "@angular/common": ">=5.0.0 <7.0.0",
-        "@angular/core": ">=5.0.0 <7.0.0",
-        "fp-ts": "^1.0.0"
+        "@angular/common": ">=5 <=9",
+        "@angular/core": ">=5 <=9",
+        "fp-ts": ">=2"
     },
     "repository": {
         "type": "git",
@@ -44,5 +48,5 @@
         "precompile-lib": "shx rm -rf ./dist",
         "test": "npm run mocha"
     },
-    "version": "0.0.2"
+    "version": "1.0.0"
 }
