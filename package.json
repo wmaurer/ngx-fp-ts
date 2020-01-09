@@ -12,11 +12,12 @@
         "@angular/core": "^8",
         "@types/node": "^12.12.6",
         "fp-ts": "^2",
-        "ng-packagr": "^5.7.1",
+        "ng-packagr": "^4.7.1",
         "prettier": "^1.18.2",
         "rxjs": "^6",
         "shx": "^0.3.2",
         "ts-node": "^8.4.1",
+        "tsickle": "^0.37.1",
         "tslint": "^5.20.1",
         "typescript": "3.5.3"
     },
