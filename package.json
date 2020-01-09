@@ -49,5 +49,5 @@
         "precompile-lib": "shx rm -rf ./dist",
         "test": "npm run mocha"
     },
-    "version": "1.0.0"
+    "version": "1.0.1"
 }
