@@ -1,7 +1,10 @@
-/*
- * Public API Surface of ngx-fp-ts
- */
-
-export * from './lib/ngx-fp-ts.service';
-export * from './lib/ngx-fp-ts.component';
-export * from './lib/ngx-fp-ts.module';
+export { IfLeftDirective, IfRightDirective } from './lib/if-either';
+export * from './lib/if-either.module';
+export { IfNoneDirective, IfSomeDirective } from './lib/if-option';
+export * from './lib/if-option.module';
+export {
+    SwitchRemoteDataDirective,
+    CaseRemoteDataPendingDirective,
+    CaseRemoteDataSuccessDirective,
+} from './lib/switch-remote-data';
+export * from './lib/switch-remote-data.module';

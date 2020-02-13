@@ -1,0 +1,29 @@
+<div>
+    <div [switchRemoteData]="rd">
+        <div *caseRemoteDataPending>pending</div>
+        <div *caseRemoteDataSuccess="let a">success {{ a.foo }}</div>
+    </div>
+</div>
+<!-- <div>
+    <div *ifSome="firstOption; else firstOptionElse; let firstOptionValue">
+        {{ firstOptionValue }}
+    </div>
+    <ng-template #firstOptionElse> first option none </ng-template>
+</div>
+
+<div>
+    <div *ifSome="secondOption; else secondOptionElse; let secondOptionValue">
+        {{ secondOptionValue }}
+    </div>
+    <ng-template #secondOptionElse> second option none </ng-template>
+</div>
+
+<div>
+    <div *ifLeft="firstEither; else firstEitherElse; let firstLeft">left: {{ firstLeft }}</div>
+    <ng-template #firstEitherElse let-firstRight> right: {{ firstRight }}</ng-template>
+</div>
+
+<div>
+    <div *ifRight="secondEither; else secondEitherElse; let secondRight">right: {{ secondRight }}</div>
+    <ng-template #secondEitherElse let-secondLeft> left: {{ secondLeft }}</ng-template>
+</div> -->

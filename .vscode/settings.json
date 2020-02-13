@@ -7,7 +7,8 @@
     "editor.tabSize": 4,
     "editor.wordWrapColumn": 120,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": false,
+        "source.fixAll": true
     },
     "files.exclude": {
         "**/.DS_Store": true,

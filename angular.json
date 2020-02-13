@@ -1,47 +1,152 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
-  "newProjectRoot": "projects",
-  "projects": {
-    "ngx-fp-ts": {
-      "projectType": "library",
-      "root": "projects/ngx-fp-ts",
-      "sourceRoot": "projects/ngx-fp-ts/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ngx-fp-ts/tsconfig.lib.json",
-            "project": "projects/ngx-fp-ts/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-fp-ts/tsconfig.lib.prod.json"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "ngx-fp-ts": {
+            "projectType": "library",
+            "root": "projects/ngx-fp-ts",
+            "sourceRoot": "projects/ngx-fp-ts/src",
+            "prefix": "",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/ngx-fp-ts/tsconfig.lib.json",
+                        "project": "projects/ngx-fp-ts/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/ngx-fp-ts/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/ngx-fp-ts/src/test.ts",
+                        "tsConfig": "projects/ngx-fp-ts/tsconfig.spec.json",
+                        "karmaConfig": "projects/ngx-fp-ts/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["projects/ngx-fp-ts/tsconfig.lib.json", "projects/ngx-fp-ts/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
             }
-          }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ngx-fp-ts/src/test.ts",
-            "tsConfig": "projects/ngx-fp-ts/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-fp-ts/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-fp-ts/tsconfig.lib.json",
-              "projects/ngx-fp-ts/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
+        "ngx-fp-ts-demo": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/ngx-fp-ts-demo",
+            "sourceRoot": "projects/ngx-fp-ts-demo/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "ngx-build-plus:browser",
+                    "options": {
+                        "outputPath": "dist/ngx-fp-ts-demo",
+                        "index": "projects/ngx-fp-ts-demo/src/index.html",
+                        "main": "projects/ngx-fp-ts-demo/src/main.ts",
+                        "polyfills": "projects/ngx-fp-ts-demo/src/polyfills.ts",
+                        "tsConfig": "projects/ngx-fp-ts-demo/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["projects/ngx-fp-ts-demo/src/favicon.ico", "projects/ngx-fp-ts-demo/src/assets"],
+                        "styles": ["projects/ngx-fp-ts-demo/src/styles.scss"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/ngx-fp-ts-demo/src/environments/environment.ts",
+                                    "with": "projects/ngx-fp-ts-demo/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": true,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "ngx-build-plus:dev-server",
+                    "options": {
+                        "browserTarget": "ngx-fp-ts-demo:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "ngx-fp-ts-demo:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "ngx-fp-ts-demo:build"
+                    }
+                },
+                "test": {
+                    "builder": "ngx-build-plus:karma",
+                    "options": {
+                        "main": "projects/ngx-fp-ts-demo/src/test.ts",
+                        "polyfills": "projects/ngx-fp-ts-demo/src/polyfills.ts",
+                        "tsConfig": "projects/ngx-fp-ts-demo/tsconfig.spec.json",
+                        "karmaConfig": "projects/ngx-fp-ts-demo/karma.conf.js",
+                        "assets": ["projects/ngx-fp-ts-demo/src/favicon.ico", "projects/ngx-fp-ts-demo/src/assets"],
+                        "styles": ["projects/ngx-fp-ts-demo/src/styles.scss"],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/ngx-fp-ts-demo/tsconfig.app.json",
+                            "projects/ngx-fp-ts-demo/tsconfig.spec.json",
+                            "projects/ngx-fp-ts-demo/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/ngx-fp-ts-demo/e2e/protractor.conf.js",
+                        "devServerTarget": "ngx-fp-ts-demo:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "ngx-fp-ts-demo:serve:production"
+                        }
+                    }
+                }
+            }
         }
-      }
-    }},
-  "defaultProject": "ngx-fp-ts"
+    },
+    "defaultProject": "ngx-fp-ts"
 }
