@@ -6,16 +6,17 @@
     "editor.renderWhitespace": "boundary",
     "editor.tabSize": 4,
     "editor.wordWrapColumn": 120,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.hg": true,
         "**/.svn": true
     },
-    "typescript.autoImportSuggestions.enabled": false,
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
-    "html.suggest.angular1": false,
     "tslint.enable": true,
     "typescript.format.insertSpaceAfterCommaDelimiter": true,
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,

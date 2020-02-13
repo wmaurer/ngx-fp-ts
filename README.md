@@ -1,112 +1,27 @@
-# ngx-fp-ts
+# NgxFpTs
 
-Angular structural directives for [fp-ts](https://github.com/gcanti/fp-ts) types (Option, Either).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
 
-## Install
+## Development server
 
-```
-    npm install ngx-fp-ts
-```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Usage
+## Code scaffolding
 
-Import the `NgxFpTsModule` module and add it to the `imports` of your module:
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-```
-    import { NgxFpTsModule } from 'ngx-fp-ts';
+## Build
 
-    @NgModule({
-        declarations: [AppComponent],
-        imports: [BrowserModule, NgxFpTsModule],
-        providers: [],
-        bootstrap: [AppComponent],
-    })
-    export class AppModule {}
-```
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-Alternatively, you can import individual directives and add them to the `declarations` of your module:
+## Running unit tests
 
-```
-    import { IfSome} from 'ngx-fp-ts';
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-    @NgModule({
-        declarations: [AppComponent],
-        imports: [BrowserModule],
-        providers: [],
-        declarations: [IfSome],
-        bootstrap: [AppComponent],
-    })
-    export class AppModule {}
-```
+## Running end-to-end tests
 
-### `ifSome`
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-Conditionally includes a template based on whether an `Option` variable is `Some` or not.
+## Further help
 
-The inline, `then` and `else` templates work in the same manner as [ngIf](https://angular.io/api/common/NgIf).
-
-The encapsulated value of the `Option` (when `Some`) can be stored in a local variable.
-
-```
-    <div *ifSome="o; else oNoneTemplate; let v">
-        o value is {{ v }}
-    </div>
-    <ng-template #oNoneTemplate>
-        o is none
-    </ng-teplate>
-```
-
-### `ifNone`
-
-Conditionally includes a template based on whether an `Option` variable is `Some` or not.
-
-The inline, `then` and `else` templates work in the same manner as [ngIf](https://angular.io/api/common/NgIf).
-
-The encapsulated value of the `Option` (when `Some`) can be stored in a local variable.
-
-```
-    <div *ifNone="o; else oNoneTemplate">
-        o value is none
-    </div>
-    <ng-template #oNoneTemplate let-v>
-        o value is {{ v }}
-    </ng-teplate>
-```
-
-### `ifLeft`
-
-Conditionally includes a template based on whether an `Either` variable is `Left` or `Right`.
-
-The inline, `then` and `else` templates work in the same manner as [ngIf](https://angular.io/api/common/NgIf).
-
-The encapsulated value of the `Either` variable can be stored in a local variable.
-
-```
-    <div *ifLeft="e; else eLeftTemplate; let v">
-        e is left, value is {{ v }}
-    </div>
-    <ng-template #eRightTemplate let-v>
-        e is right, value is {{ v }}
-    </ng-teplate>
-```
-
-### `ifRight`
-
-Conditionally includes a template based on whether an `Either` variable is `Right` or `Left`.
-
-The inline, `then` and `else` templates work in the same manner as [ngIf](https://angular.io/api/common/NgIf).
-
-The encapsulated value of the `Either` variable can be stored in a local variable.
-
-```
-    <div *ifRight="e; else eRightTemplate; let v">
-        e is right, value is {{ v }}
-    </div>
-    <ng-template #eLeftTemplate let-v>
-        e is left, value is {{ v }}
-    </ng-teplate>
-```
-
-## Thanks
-
-Special thanks to [Giulio Canti](https://github.com/gcanti) for the fantastic [fp-ts](https://github.com/gcanti/fp-ts) library.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
