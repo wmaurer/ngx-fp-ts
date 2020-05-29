@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Option, isNone, isSome } from 'fp-ts/lib/Option';
+import { Option, isNone, isSome } from 'fp-ts/es6/Option';
 
 import { initialIfContext, initialRefs, IfContext, assertTemplate, updateView } from './common';
 
