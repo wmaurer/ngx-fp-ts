@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"D:/Projects/github_wmaurer/ngx-fp-ts/libs/ngx-fp-ts/src/","sources":["index.ts"],"names":[],"mappings":"AAAA,cAAc,iBAAiB,CAAC;AAChC,cAAc,iBAAiB,CAAC;AAChC,cAAc,wBAAwB,CAAC","sourcesContent":["export * from './lib/if-either';\nexport * from './lib/if-option';\nexport * from './lib/ngx-fp-ts.module';\n"]}

@@ -1,0 +1,22 @@
+{
+  "name": "ngx-fp-ts",
+  "version": "2.0.0-next.0",
+  "peerDependencies": {
+    "@angular/common": "^10.1.6",
+    "@angular/core": "^10.1.6",
+    "fp-ts": "^2.8.4"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "bundles/ngx-fp-ts.umd.js",
+  "module": "fesm2015/ngx-fp-ts.js",
+  "es2015": "fesm2015/ngx-fp-ts.js",
+  "esm2015": "esm2015/ngx-fp-ts.js",
+  "fesm2015": "fesm2015/ngx-fp-ts.js",
+  "typings": "ngx-fp-ts.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
+  }
+}

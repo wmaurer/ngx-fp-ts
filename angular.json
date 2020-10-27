@@ -1,0 +1,180 @@
+{
+    "version": 1,
+    "projects": {
+        "ngx-fp-ts-demo": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "apps/ngx-fp-ts-demo",
+            "sourceRoot": "apps/ngx-fp-ts-demo/src",
+            "prefix": "ngx-fp-ts",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/ngx-fp-ts-demo",
+                        "index": "apps/ngx-fp-ts-demo/src/index.html",
+                        "main": "apps/ngx-fp-ts-demo/src/main.ts",
+                        "polyfills": "apps/ngx-fp-ts-demo/src/polyfills.ts",
+                        "tsConfig": "apps/ngx-fp-ts-demo/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["apps/ngx-fp-ts-demo/src/favicon.ico", "apps/ngx-fp-ts-demo/src/assets"],
+                        "styles": ["apps/ngx-fp-ts-demo/src/styles.scss"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/ngx-fp-ts-demo/src/environments/environment.ts",
+                                    "with": "apps/ngx-fp-ts-demo/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "ngx-fp-ts-demo:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "ngx-fp-ts-demo:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "ngx-fp-ts-demo:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/ngx-fp-ts-demo/src/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/ngx-fp-ts-demo/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "ngx-fp-ts-demo-e2e": {
+            "root": "apps/ngx-fp-ts-demo-e2e",
+            "sourceRoot": "apps/ngx-fp-ts-demo-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/ngx-fp-ts-demo-e2e/cypress.json",
+                        "tsConfig": "apps/ngx-fp-ts-demo-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "ngx-fp-ts-demo:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "ngx-fp-ts-demo:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/ngx-fp-ts-demo-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "ngx-fp-ts": {
+            "projectType": "library",
+            "root": "libs/ngx-fp-ts",
+            "sourceRoot": "libs/ngx-fp-ts/src",
+            "prefix": "ngx-fp-ts",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "options": {
+                        "tsConfig": "libs/ngx-fp-ts/tsconfig.lib.json",
+                        "project": "libs/ngx-fp-ts/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/ngx-fp-ts/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/ngx-fp-ts/src/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/ngx-fp-ts/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            },
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            }
+        }
+    },
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
+    },
+    "schematics": {
+        "@nrwl/angular": {
+            "application": {
+                "linter": "eslint"
+            },
+            "library": {
+                "linter": "eslint"
+            },
+            "storybook-configuration": {
+                "linter": "eslint"
+            }
+        },
+        "@nrwl/angular:application": {
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "unitTestRunner": "jest"
+        }
+    },
+    "defaultProject": "ngx-fp-ts-demo"
+}

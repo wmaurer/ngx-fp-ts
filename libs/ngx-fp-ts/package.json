@@ -1,0 +1,21 @@
+{
+    "name": "ngx-fp-ts",
+    "version": "2.0.0-next.0",
+    "peerDependencies": {
+        "@angular/common": "^10.1.6",
+        "@angular/core": "^10.1.6",
+        "fp-ts": "^2.8.4"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0"
+    },
+    "ngPackage": {
+        "lib": {
+            "entryFile": "./src/index.ts",
+            "umdModuleIds": {
+                "fp-ts/Either": "Either",
+                "fp-ts/Option": "Option"
+            }
+        }
+    }
+}

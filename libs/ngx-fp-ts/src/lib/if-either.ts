@@ -1,5 +1,5 @@
 import { Directive, Input, ViewContainerRef, TemplateRef } from '@angular/core';
-import { Either, isRight, isLeft } from 'fp-ts/es6/Either';
+import { Either, isRight, isLeft } from 'fp-ts/Either';
 
 import { initialIfContext, initialRefs, IfContext, assertTemplate, updateView } from './common';
 
