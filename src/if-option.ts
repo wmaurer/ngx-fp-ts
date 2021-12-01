@@ -4,31 +4,31 @@ import { Option, isNone, isSome } from 'fp-ts/es6/Option';
 import { initialIfContext, initialRefs, IfContext, assertTemplate, updateView } from './common';
 
 @Directive({ selector: '[ifSome]' })
-export class IfSome {
-    private context = initialIfContext();
+export class IfSome<T = unknown> {
+    private context: IfContext<T> = initialIfContext();
 
     private refs = initialRefs();
 
-    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<IfContext>) {
+    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<IfContext<T>>) {
         this.refs.viewContainer = viewContainer;
         this.refs.thenTemplateRef = templateRef;
     }
 
     @Input()
-    set ifSome(option: Option<any>) {
+    set ifSome(option: Option<T> | null) {
         testIsAnOption(option, 'ifSome');
-        if (isSome(option)) {
+        if (option && isSome(option)) {
             this.context.ifTrue = true;
             this.context.$implicit = option.value;
         } else {
             this.context.ifTrue = false;
-            this.context.$implicit = undefined;
+            this.context.$implicit = null!;
         }
         updateView(this.context, this.refs);
     }
 
     @Input()
-    set ifSomeThen(templateRef: TemplateRef<IfContext> | null) {
+    set ifSomeThen(templateRef: TemplateRef<IfContext<T>> | null) {
         assertTemplate('ifSomeThen', templateRef);
         this.refs.thenTemplateRef = templateRef;
         this.refs.thenViewRef = null;
@@ -36,30 +36,39 @@ export class IfSome {
     }
 
     @Input()
-    set ifSomeElse(templateRef: TemplateRef<IfContext> | null) {
+    set ifSomeElse(templateRef: TemplateRef<IfContext<T>> | null) {
         assertTemplate('ifSomeElse', templateRef);
         this.refs.elseTemplateRef = templateRef;
         this.refs.elseViewRef = null;
         updateView(this.context, this.refs);
     }
+
+    static ngTemplateGuard_ifSome: 'binding';
+
+    static ngTemplateContextGuard<T>(
+        _dir: IfSome<T>,
+        _ctx: any,
+    ): _ctx is IfContext<Exclude<T, false | 0 | '' | null | undefined>> {
+        return true;
+    }
 }
 
 @Directive({ selector: '[ifNone]' })
-export class IfNone {
-    private context = initialIfContext();
+export class IfNone<T = unknown> {
+    private context: IfContext<T> = initialIfContext();
 
     private refs = initialRefs();
 
-    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<IfContext>) {
+    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<IfContext<T>>) {
         this.refs.viewContainer = viewContainer;
         this.refs.thenTemplateRef = templateRef;
     }
 
     @Input()
-    set ifNone(option: Option<any>) {
+    set ifNone(option: Option<T> | null) {
         testIsAnOption(option, 'ifNone');
-        this.context.$implicit = undefined;
-        if (isNone(option)) {
+        this.context.$implicit = null!;
+        if (option === null || isNone(option)) {
             this.context.ifTrue = true;
         } else {
             this.context.ifTrue = false;
@@ -68,7 +77,7 @@ export class IfNone {
     }
 
     @Input()
-    set ifNoneThen(templateRef: TemplateRef<IfContext> | null) {
+    set ifNoneThen(templateRef: TemplateRef<IfContext<T>> | null) {
         assertTemplate('ifNoneThen', templateRef);
         this.refs.thenTemplateRef = templateRef;
         this.refs.thenViewRef = null;
@@ -76,7 +85,7 @@ export class IfNone {
     }
 
     @Input()
-    set ifNoneElse(templateRef: TemplateRef<IfContext> | null) {
+    set ifNoneElse(templateRef: TemplateRef<IfContext<T>> | null) {
         assertTemplate('ifNoneElse', templateRef);
         this.refs.elseTemplateRef = templateRef;
         this.refs.elseViewRef = null;

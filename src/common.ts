@@ -1,16 +1,17 @@
 import { EmbeddedViewRef, TemplateRef, ViewContainerRef, ɵstringify as stringify } from '@angular/core';
 
-export interface IfContext {
-    $implicit: any;
+export interface IfContext<T = unknown> {
+    $implicit: T;
     ifTrue: boolean;
 }
-export const initialIfContext = (): IfContext => ({
-    $implicit: null,
+
+export const initialIfContext = <T>(): IfContext<T> => ({
+    $implicit: null!,
     ifTrue: false,
 });
 
 export interface Refs {
-    viewContainer: ViewContainerRef;
+    viewContainer: ViewContainerRef | null;
     thenTemplateRef: TemplateRef<IfContext> | null;
     elseTemplateRef: TemplateRef<IfContext> | null;
     thenViewRef: EmbeddedViewRef<IfContext> | null;
@@ -26,7 +27,7 @@ export const initialRefs = (): Refs => ({
 
 export function updateView(context: IfContext, refs: Refs) {
     if (context.ifTrue) {
-        if (!refs.thenViewRef) {
+        if (!refs.thenViewRef && refs.viewContainer) {
             refs.viewContainer.clear();
             refs.elseViewRef = null;
             if (refs.thenTemplateRef) {
@@ -34,7 +35,7 @@ export function updateView(context: IfContext, refs: Refs) {
             }
         }
     } else {
-        if (!refs.elseViewRef) {
+        if (!refs.elseViewRef && refs.viewContainer) {
             refs.viewContainer.clear();
             refs.thenViewRef = null;
             if (refs.elseTemplateRef) {
